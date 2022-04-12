@@ -42,5 +42,5 @@ my_cur = my_cnx.cursor()
 my_cur.execute("SELECT FRUIT_NAME FROM FRUIT_LOAD_LIST")
 df = pandas.DataFrame(
     my_cur,
-    columns=('col %d' % i for i in range(20))
+    columns=('col %d' % i for i in range(20)))
 streamlit.dataframe(df)
