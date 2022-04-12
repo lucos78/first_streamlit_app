@@ -42,9 +42,12 @@ my_cur = my_cnx.cursor()
 my_cur.execute("SELECT FRUIT_NAME FROM FRUIT_LOAD_LIST")
 streamlit.dataframe(my_cur)
 my_data_rows = my_cur.fetchall()
-my_data_rows = my_data_rows.set_index('FRUIT_NAME')
+my_column_names = [i[0] for i in cur.description]
+my_column_names = my_column_names.set_index('FRUIT_NAME')
+
 streamlit.header("The Fruit Load List contains:")
 streamlit.dataframe(my_data_rows)
+streamlit.dataframe(my_column_names)
 
 add_my_fruit = streamlit.multiselect("Add some fruits:", list(my_data_rows),['Jackfruit'])
 add_my_fruit_to_show = my_data_rows.loc[add_my_fruit]
