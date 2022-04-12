@@ -41,22 +41,3 @@ my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("SELECT FRUIT_NAME FROM FRUIT_LOAD_LIST")
 streamlit.dataframe(my_cur)
-my_data_rows = my_cur.fetchall()
-
-streamlit.header("The Fruit Load List contains:")
-streamlit.dataframe(my_data_rows, columns = ('col %d' % i for i in range(20)))
-
-add_my_fruit = streamlit.multiselect("Add some fruits:", list(my_data_rows),['Jackfruit'])
-add_my_fruit_to_show = my_data_rows.loc[add_my_fruit]
-#display table
-streamlit.dataframe(add_my_fruit_to_show)
-
-
-
-add_my_fruit = my_data_rows
-add_my_fruit = add_my_fruit.set_index()
-#pick list
-add_my_fruit_selected = streamlit.multiselect("Add some fruits:", list(add_my_fruit.index),['Jackfruit'])
-add_my_fruit_to_show = add_my_fruit.loc[add_my_fruit_selected]
-#display table
-streamlit.dataframe(add_my_fruit_to_show)
