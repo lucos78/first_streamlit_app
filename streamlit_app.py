@@ -41,5 +41,7 @@ my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("SELECT FRUIT_NAME FROM FRUIT_LOAD_LIST")
 my_data_rows = my_cur.fetchall()
-my_data = '{ FRUIT'+my_data_rows+'}'
+my_1 = "{ 'FRUIT' :"
+my_2 = "}"
+my_data = my_1+my_data_rows+my_1
 streamlit.text(my_data)
