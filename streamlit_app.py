@@ -34,9 +34,19 @@ streamlit.dataframe(fruityvice_normalized)
 
 import snowflake.connector
 
+#snowflake data
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
 my_data_rows = my_cur.fetchall()
 streamlit.header("The Fruit Load List contains:")
 streamlit.dataframe(my_data_rows)
+
+
+my_fruit_list1 = my_data_rows
+my_fruit_list1 = my_fruit_list1.set_index('Fruit_name')
+#pick list
+fruits1_selected = streamlit.multiselect("Add some fruits:", list(my_fruit_list1.index),['Jackfruit'])
+fruit_to_show1 = my_fruit_list1.loc[fruits1_selected]
+#display table
+streamlit.dataframe(fruit_to_show1)
