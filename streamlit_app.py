@@ -40,4 +40,4 @@ import snowflake.connector
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("SELECT FRUIT_NAME FROM FRUIT_LOAD_LIST")
-streamlit.dataframe(my_cur)
+streamlit.dataframe(my_cur, colums = ('FRUIT'))
