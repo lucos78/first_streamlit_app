@@ -43,7 +43,4 @@ my_cur.execute("SELECT FRUIT_NAME FROM FRUIT_LOAD_LIST")
 my_data_rows = my_cur.fetchall()
 streamlit.header("The Fruit Load List contains:")
 streamlit.dataframe(my_data_rows)
-add_my_fruit = streamlit.multiselect("Add some fruits:", list(my_data_rows),['Jackfruit'])
-add_my_fruit_to_show = my_data_rows.loc[add_my_fruit]
-#display table
-streamlit.dataframe(add_my_fruit_to_show)
+
